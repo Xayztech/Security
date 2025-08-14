@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&display=swap');
+
+body { 
+    font-family: 'Source Code Pro', monospace, Times, 'Times New Roman', serif; 
+    background-color: #1a1a2e; 
+    color: #e0e0e0; 
+    margin: 0; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh; 
+}
+
+#login-container { 
+    text-align: center; 
+}
+
+#dashboard-container { 
+    width: 95%; 
+    max-width: 1300px; 
+    height: 95vh; 
+    background-color: #16213e; 
+    border-radius: 10px; 
+    display: none; /* Awalnya disembunyikan */
+    flex-direction: column; 
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.login-box { 
+    background-color: #16213e; 
+    padding: 40px; 
+    border-radius: 10px; 
+    border: 1px solid #0f3460; 
+    min-width: 320px; 
+}
+
+.login-box h2 { 
+    margin-bottom: 20px; 
+    color: #e94560; 
+}
+
+#login-error {
+    color: #ffa200;
+    height: 1em;
+    margin-top: 10px;
+}
+
+#welcome-text {
+    margin-top: 20px;
+    font-size: 1.2em;
+    color: #777;
+    height: 2em;
+}
+
+input, select { 
+    width: 100%; 
+    padding: 12px; 
+    margin-bottom: 15px; 
+    border: 1px solid #444; 
+    border-radius: 5px; 
+    background-color: #252525; 
+    color: #e0e0e0; 
+    box-sizing: border-box; 
+}
+
+button { 
+    padding: 12px 18px; 
+    border: none; 
+    border-radius: 5px; 
+    background-color: #e94560; 
+    color: white; 
+    font-weight: bold; 
+    cursor: pointer; 
+    transition: all 0.3s; 
+    margin: 5px 0; 
+}
+
+button:hover { 
+    background-color: #d43d51; 
+    transform: translateY(-2px); 
+}
+
+button:disabled { 
+    background-color: #555; 
+    cursor: not-allowed; 
+    transform: none;
+}
+
+.dashboard-header { 
+    padding: 20px; 
+    border-bottom: 1px solid #0f3460; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+}
+
+.dashboard-header h1 { 
+    font-size: 1.5em; 
+    margin: 0; 
+}
+
+#logout-button { 
+    background-color: #533483; 
+}
+
+.dashboard-content { 
+    flex-grow: 1; 
+    padding: 20px; 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
+    gap: 20px; 
+    overflow-y: auto; 
+}
+
+.widget { 
+    background-color: #0f3460; 
+    padding: 20px; 
+    border-radius: 8px; 
+    text-align: left; 
+}
+
+.widget h3 { 
+    color: #e94560; 
+    border-bottom: 1px solid #1a1a2e; 
+    padding-bottom: 10px; 
+    margin-top: 0; 
+    margin-bottom: 20px; 
+}
+
+.button-group { 
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 10px; 
+    margin-top: 10px; 
+}
+
+#loading-indicator { 
+    color: #ffa200; 
+    font-weight: bold; 
+    animation: pulse 1.5s infinite; 
+}
+
+@keyframes pulse { 
+    0% { opacity: 1; } 
+    50% { opacity: 0.5; } 
+    100% { opacity: 1; } 
+}
+
+#token-list, #remote-status-display, #license-key-display { 
+    background-color: #1a1a2e; 
+    padding: 10px; 
+    border-radius: 5px; 
+    min-height: 20px; 
+    word-wrap: break-word; 
+}
+
+/* Sembunyikan widget berdasarkan peran secara default */
+.admin-only, .dev-only { 
+    display: none; 
+}

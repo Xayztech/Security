@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    const GITHUB_TOKEN = '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'; // 👈 PASTE TOKEN GITHUB ANDA DI SINI
+    const GITHUB_TOKEN = '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'; // 👈 PASTE TOKEN GITHUB ANDA DI SINI
 
     const REPO_OWNER = 'Xayztech'; // 👈 GANTI DENGAN USERNAME GITHUB ANDA
     const REPO_NAME = 'Root-System-Core';   // 👈 GANTI DENGAN NAMA REPO ANDA

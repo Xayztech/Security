@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    const GITHUB_TOKEN = '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'; // 👈 PASTE TOKEN GITHUB ANDA DI SINI
+    const GITHUB_TOKEN = 'ghp_Hxxxx'; // 👈 PASTE TOKEN GITHUB ANDA DI SINI
 
     const REPO_OWNER = 'Xayztech'; // 👈 GANTI DENGAN USERNAME GITHUB ANDA
     const REPO_NAME = 'Root-System-Core';   // 👈 GANTI DENGAN NAMA REPO ANDA

@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    const GITHUB_TOKEN = 'ghp_Hxxxx'; // 👈 PASTE TOKEN GITHUB ANDA DI SINI
+    const GITHUB_TOKEN = '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'; // 👈 PASTE TOKEN GITHUB ANDA DI SINI
     const REPO_OWNER = 'Xayztech'; // 👈 GANTI DENGAN USERNAME GITHUB ANDA
     const REPO_NAME = 'Root-System-Core';   // 👈 GANTI DENGAN NAMA REPO ANDA
     const USER_FILE_PATH = 'web-users.json'; // File untuk login panel

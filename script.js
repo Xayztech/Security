@@ -1,11 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     const GITHUB_TOKEN = 'ghp_Hxxxx'; // 👈 PASTE TOKEN GITHUB ANDA DI SINI
-
     const REPO_OWNER = 'Xayztech'; // 👈 GANTI DENGAN USERNAME GITHUB ANDA
     const REPO_NAME = 'Root-System-Core';   // 👈 GANTI DENGAN NAMA REPO ANDA
-
-    // Path ke semua file di dalam repo
     const USER_FILE_PATH = 'web-users.json'; // File untuk login panel
     const TOKEN_FILE_PATH = 'Ubuntu-sudo-root.json';
     const REMOTE_FILE_PATH = 'idlinux.json';

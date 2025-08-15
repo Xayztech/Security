@@ -52,7 +52,33 @@ document.addEventListener('DOMContentLoaded', () => {
     async function getGithubFile(filePath) { try { const response = await fetch('/api/get-github-file', { method: 'POST', body: JSON.stringify({ filePath, repoOwner: REPO_OWNER, repoName: REPO_NAME }) }); if (!response.ok) throw new Error(await response.text()); return await response.json(); } catch (e) { console.error(`Gagal ambil file ${filePath}:`, e); return { data: null, sha: null }; } }
     async function updateGithubFile(filePath, dataToSave, currentSha, commitMessage) { loadingIndicator.style.display = 'block'; try { const response = await fetch('/api/update-github', { method: 'POST', body: JSON.stringify({ filePath, dataToSave, currentSha, commitMessage, repoOwner: REPO_OWNER, repoName: REPO_NAME }) }); if (!response.ok) throw new Error(await response.text()); const result = await response.json(); if (result.error) throw new Error(result.error); return result.newSha; } catch (e) { console.error(`Gagal simpan file ${filePath}:`, e); alert(`Gagal menyimpan: ${e.message}`); return null; } finally { loadingIndicator.style.display = 'none'; } }
     
-    async function handleLogin(event) { event.preventDefault(); loadingIndicator.style.display = 'block'; const userResult = await getGithubFile(USER_FILE_PATH); loadingIndicator.style.display = 'none'; if (!userResult || !userResult.data) return alert("Eror!!!."); allPanelUsers = userResult.data; usersSha = userResult.sha; const username = document.getElementById('username').value; const password = document.getElementById('password').value; currentUser = allPanelUsers.find(u => u.username === username && u.password === password); if (currentUser) { loginContainer.style.display = 'none'; dashboardContainer.style.display = 'flex'; await loadInitialDashboardData(); } else { loginError.textContent = "Username atau Password salah!"; } }
+    async function handleLogin(event) {
+        event.preventDefault();
+
+        loadingIndicator.style.display = 'block';
+        const userResult = await getGithubFile(USER_FILE_PATH);
+        loadingIndicator.style.display = 'none';
+
+        if (!userResult || !userResult.data) {
+            alert("KRITIS: Gagal memuat file user dari GitHub. Pastikan Environment Variable di Vercel sudah benar dan di-deploy ulang.");
+            return;
+        }
+
+        allPanelUsers = userResult.data;
+        usersSha = userResult.sha;
+
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        currentUser = allPanelUsers.find(u => u.username === username && u.password === password);
+
+        if (currentUser) {
+            loginContainer.style.display = 'none';
+            dashboardContainer.style.display = 'flex';
+            await loadInitialDashboardData();
+        } else {
+            loginError.textContent = "Username atau Password yang Anda masukkan salah.";
+        }
+                                                                                                                                                                                                                                  }
     async function loadInitialDashboardData() { loadingIndicator.style.display = 'block'; const [tokenResult, remoteResult, licenseResult] = await Promise.all([ getGithubFile(TOKEN_FILE_PATH), getGithubFile(REMOTE_FILE_PATH), getGithubFile(LICENSE_FILE_PATH) ]); loadingIndicator.style.display = 'none'; if (tokenResult.data) { tokenData = tokenResult.data; tokenSha = tokenResult.sha; } if (remoteResult.data) { remoteData = remoteResult.data; remoteSha = remoteResult.sha; } if (licenseResult.data) { licenseData = licenseResult.data; licenseSha = licenseResult.sha; } renderDashboard(); }
     function getManagableRoles(role) { const allRoles = ['developer', 'owner', 'tk', 'pt', 'reseller']; const i = allRoles.indexOf(role); return i === -1 ? [] : allRoles.slice(i); }
     function renderDashboard() { if (!currentUser) return; userRoleDisplay.textContent = currentUser.role.toUpperCase(); tokenListDiv.innerHTML = ''; (tokenData.tokens || []).forEach(token => { const p = document.createElement('p'); p.textContent = `• ${token}`; tokenListDiv.appendChild(p); }); remoteStatusDisplay.textContent = `${remoteData.status.toUpperCase()} | ID: ${remoteData.id_script}`; scriptIdInput.value = remoteData.id_script; if (licenseKeyDisplay) { licenseKeyDisplay.textContent = licenseData; } document.querySelectorAll('.admin-only, .dev-only').forEach(el => el.style.display = 'none'); if (currentUser.role !== 'reseller') { document.querySelector('.admin-only').style.display = 'block'; const manageableRoles = getManagableRoles(currentUser.role); newRoleSelect.innerHTML = ''; if (manageableRoles.length > 0) { manageableRoles.forEach(role => { const option = document.createElement('option'); option.value = role; option.textContent = role.charAt(0).toUpperCase() + role.slice(1); newRoleSelect.appendChild(option); }); createUserButton.disabled = false; } else { const option = document.createElement('option'); option.textContent = 'Tidak ada hak akses'; newRoleSelect.appendChild(option); createUserButton.disabled = true; } } if (currentUser.role === 'developer') { document.querySelectorAll('.dev-only').forEach(el => el.style.display = 'block'); } }

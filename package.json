@@ -1,4 +1,8 @@
 {
+  "name": "bluee-database",
+  "version": "1.0.0",
+  "description": "Serverless functions for the Bluee database",
+  "main": "api/get-github-file.js",
   "dependencies": {
     "node-fetch": "^2.6.7"
   }

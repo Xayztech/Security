@@ -4,7 +4,6 @@ export default async function handler(request, response) {
   if (request.method !== 'POST') {
     return response.status(405).send('Method Not Allowed');
   }
-
   try {
     const { filePath, repoOwner, repoName } = request.body;
     const GITHUB_TOKEN = process.env.GITHUB_API_TOKEN;
@@ -14,7 +13,6 @@ export default async function handler(request, response) {
     }
 
     const API_URL = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${filePath}?t=${new Date().getTime()}`;
-
     const githubResponse = await fetch(API_URL, {
       headers: { 'Authorization': `token ${GITHUB_TOKEN}` }
     });
@@ -31,8 +29,7 @@ export default async function handler(request, response) {
     const data = filePath.endsWith('.json') ? JSON.parse(content) : content;
 
     return response.status(200).json({ data, sha: file.sha });
-
   } catch (error) {
     return response.status(500).json({ error: error.message });
   }
-  }
+}

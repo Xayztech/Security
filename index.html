@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bluee Security Database</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="background-container"></div>
+    <div class="overlay"></div>
+
+    <button id="music-control">🔊 Play Music</button>
+
+    <audio id="backsound" loop></audio>
+
+    <div id="login-container">
+        <div class="login-box">
+            <h2>Login To Continue</h2>
+            <form id="login-form">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+                
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+                
+                <button type="submit">Login</button>
+            </form>
+            <p class="static-text">Login to continue</p>
+            <p id="login-error"></p>
+        </div>
+        <p id="welcome-text"></p>
+    </div>
+
+    <div id="dashboard-container" style="display: none;">
+        <header class="dashboard-header">
+            <h1>Bluee Database | Role: <span id="user-role-display"></span></h1>
+            <div id="loading-indicator" style="display: none;"><span>WORKING...</span></div>
+            <button id="logout-button">Logout</button>
+        </header>
+        <main class="dashboard-content">
+            <div class="widget admin-only">
+                <h3>Create New User</h3>
+                <input type="text" id="new-username" placeholder="New Username" required>
+                <input type="text" id="new-password" placeholder="New Password" required>
+                <select id="new-role-select"></select>
+                <button id="create-user-button">Create & Save User</button>
+            </div>
+            <div class="widget">
+                <h3>Token Management</h3>
+                <div id="token-list">Loading...</div>
+                <hr>
+                <input type="text" id="token-input" placeholder="Masukkan Token Bot">
+                <div class="button-group">
+                    <button id="add-token-btn">Add Token</button>
+                    <button id="del-token-btn">Delete Token</button>
+                </div>
+            </div>
+            <div class="widget dev-only">
+                <h3>Developer Remote Control</h3>
+                <p>Status: <strong id="remote-status-display">Loading...</strong></p>
+                <div class="button-group">
+                    <button id="remote-on-btn">SET ON</button>
+                    <button id="remote-off-btn">SET OFF</button>
+                </div>
+                <hr>
+                <input type="text" id="script-id-input" placeholder="ID Script Baru">
+                <button id="set-script-id-btn">Set ID Script</button>
+            </div>
+            <div class="widget">
+                <h3>License Key</h3>
+                 <p>Current Contents: <strong id="license-key-display">Loading...</strong></p>
+                 <input type="text" id="license-key-input" placeholder="Password / License Key Baru">
+                 <button id="set-license-btn">Set License</button>
+            </div>
+        </main>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
